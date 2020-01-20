@@ -39,7 +39,7 @@ class App extends Component {
 			selectedFile : null,
 			imgForUpload : null,
 			box          : {},
-			age          : 0,
+			age          : 'Hello! What are you for?',
 		};
 	}
 
@@ -62,7 +62,7 @@ class App extends Component {
 
 	grabAge = (response) => {
 		const age = response.outputs[0].data.regions[0].data.face.age_appearance.concepts[0].name;
-		this.setState({ age: age });
+		this.setState({ age: `Hey! Nice Picture! Here, she/he looks like ${age} years old.` });
 		// console.log(response.outputs[0].data.regions[0].data.face.age_appearance.concepts[0].name);
 	};
 

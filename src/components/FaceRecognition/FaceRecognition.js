@@ -4,10 +4,8 @@ import './FaceRecognition.css';
 const FaceRecognition = ({ imgURL, box, imgForUpload, age }) => {
 	return (
 		<div className='ml5 mr5'>
-			<p className='f3'>
-				{`You look like ${age} years old.`}
-			</p>
-			<div className='fl w-100 tc'>
+			<p className='f3'>{age}</p>
+			<div className='fl w-100'>
 				{/* <div className='fl w-50'> */}
 				<div className='absolute mt2'>
 					<img
