@@ -16,15 +16,15 @@ const InputForm = ({ onInputChange, onInputSubmit, onPhotoSelection, onPhotoSubm
 				<button onClick={onInputSubmit} className='bg-washed-red f4 pa1 ma1 w-40 grow link br4'>
 					Detect
 				</button>
-				<br />
+				{/* <br />
 				<input
 					type='file'
 					onChange={onPhotoSelection}
 					className='formInput f6 pa1 pl3 ma1 w-50 br4 bg-light-gray'
 				/>
 				<button onClick={onPhotoSubmit} className='bg-washed-red f4 pa1 ma1 w-40 grow link br4'>
-					Upload
-				</button>
+					Detect
+				</button> */}
 			</div>
 		</div>
 	);

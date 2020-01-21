@@ -38,8 +38,12 @@ class App extends Component {
 			imgURL       : '',
 			selectedFile : null,
 			imgForUpload : null,
-			box          : {},
-			age          : 'Hello! What are you for?',
+			// age          : ,
+			demography   : {
+				gender : 'Hello!',
+				age    : 'What are you waiting for?',
+				box    : {},
+			},
 		};
 	}
 
@@ -56,13 +60,27 @@ class App extends Component {
 		};
 	};
 
-	displayFaceDetectionBox = (box) => {
-		this.setState({ box: box });
-	};
-
 	grabAge = (response) => {
-		const age = response.outputs[0].data.regions[0].data.face.age_appearance.concepts[0].name;
-		this.setState({ age: `Hey! Nice Picture! Here, she/he looks like ${age} years old.` });
+		const demography = response.outputs[0].data.regions[0].data.face;
+		if (demography.gender_appearance.concepts[0].name === 'feminine') {
+			this.setState({
+				demography : {
+					// gender : demography.gender_appearance.concepts[0].name,
+					gender : `Hey! Nice picture! I believe she is `,
+					age    : `${demography.age_appearance.concepts[0].name} years old.`,
+					box    : this.calculateFaceLocation(response),
+				},
+			});
+		}
+		if (demography.gender_appearance.concepts[0].name === 'masculine') {
+			this.setState({
+				demography : {
+					gender : `Hey! Nice picture! I believe he is `,
+					age    : `${demography.age_appearance.concepts[0].name} years old.`,
+					box    : this.calculateFaceLocation(response),
+				},
+			});
+		}
 		// console.log(response.outputs[0].data.regions[0].data.face.age_appearance.concepts[0].name);
 	};
 
@@ -123,10 +141,11 @@ class App extends Component {
 					onPhotoSubmit={this.onPhotoSubmit}
 				/>
 				<FaceRecognition
-					box={this.state.box}
+					box={this.state.demography.box}
 					imgURL={this.state.imgURL}
 					imgForUpload={this.state.imgForUpload}
-					age={this.state.age}
+					demoGen={this.state.demography.gender}
+					demoAge={this.state.demography.age}
 				/>
 			</div>
 		);

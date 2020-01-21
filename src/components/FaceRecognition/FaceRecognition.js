@@ -1,27 +1,23 @@
 import React from 'react';
 import './FaceRecognition.css';
 
-const FaceRecognition = ({ imgURL, box, imgForUpload, age }) => {
+const FaceRecognition = ({ imgURL, box, imgForUpload, demoGen, demoAge }) => {
 	return (
-		<div className='ml5 mr5'>
-			<p className='f3'>{age}</p>
-			<div className='fl w-100'>
-				{/* <div className='fl w-50'> */}
-				<div className='absolute mt2'>
-					<img
-						id={'inputImg'}
-						alt='body image1'
-						src={imgURL}
-						className='br4 ba b--washed-red bw1 shadow-5 mb2 mr2'
-						width='400px'
-						height='auto'
-					/>
-					<div
-						className='bounding-box'
-						style={{ top: box.topRow, right: box.rightCol, bottom: box.bottomRow, left: box.leftCol }}
-					/>
-				</div>
-				{/* </div> */}
+		<div className='fl w-100 tc'>
+			<p className='f3'>{`${demoGen} ${demoAge}`}</p>
+			<div className=' ml5 mr5 absolute mt2'>
+				<img
+					id={'inputImg'}
+					alt='body image1'
+					src={imgURL}
+					className='br4 ba b--washed-red bw1 shadow-5 mb2 mr2'
+					width='500px'
+					height='auto'
+				/>
+				<div
+					className='bounding-box'
+					style={{ top: box.topRow, right: box.rightCol, bottom: box.bottomRow, left: box.leftCol }}
+				/>
 			</div>
 			{/* <div className='fl w-100 ml5 mt2'>
 				<h3>APPEARANCE: </h3>
@@ -45,7 +41,7 @@ const FaceRecognition = ({ imgURL, box, imgForUpload, age }) => {
 							alt='body image2'
 							src={imgForUpload}
 							className='br4 ba b--washed-red bw1 shadow-5 mb2 mr2'
-							width='400px'
+							width='500px'
 							height='auto'
 						/>
 					</div>
