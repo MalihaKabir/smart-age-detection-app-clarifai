@@ -38,7 +38,6 @@ class App extends Component {
 			imgURL       : '',
 			selectedFile : null,
 			imgForUpload : null,
-			// age          : ,
 			demography   : {
 				gender : 'Hello!',
 				age    : 'What are you waiting for?',
@@ -65,7 +64,6 @@ class App extends Component {
 		if (demography.gender_appearance.concepts[0].name === 'feminine') {
 			this.setState({
 				demography : {
-					// gender : demography.gender_appearance.concepts[0].name,
 					gender : `Hey! Nice picture! I believe she is `,
 					age    : `${demography.age_appearance.concepts[0].name} years old.`,
 					box    : this.calculateFaceLocation(response),
@@ -81,7 +79,6 @@ class App extends Component {
 				},
 			});
 		}
-		// console.log(response.outputs[0].data.regions[0].data.face.age_appearance.concepts[0].name);
 	};
 
 	onInputChange = (event) => {
@@ -94,7 +91,6 @@ class App extends Component {
 			.predict(Clarifai.DEMOGRAPHICS_MODEL, this.state.inputField)
 			// .then((response) => console.log(response))
 			.then((response) => this.grabAge(response))
-			// .then((response) => this.displayFaceDetectionBox(this.calculateFaceLocation(response)))
 			.catch((err) => console.log(err));
 	};
 

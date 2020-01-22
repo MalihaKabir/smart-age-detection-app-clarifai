@@ -4,9 +4,9 @@ import './InputForm.css';
 const InputForm = ({ onInputChange, onInputSubmit, onPhotoSelection, onPhotoSubmit }) => {
 	return (
 		<div className='fl w-100 mb3'>
-			<h2>{'SmartAgeDetection'}</h2>
-			<p>{'Give us a direct link to a file on the web or try your own image'}</p>
-			<div className='form pa2 br3 shadow-5 mr5 ml4'>
+			<h2 className='f3 mb1'>{'SmartAgeDetection'}</h2>
+			<p className='f5 ml2 mr2 mt0'>{'(Give us a direct link to a file on the web or try your own image)'}</p>
+			<div className='form pa2 br3 shadow-5 mr4 ml4'>
 				<input
 					type='text'
 					onChange={onInputChange}
