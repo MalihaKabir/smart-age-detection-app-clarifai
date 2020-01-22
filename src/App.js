@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Navigation from './components/Navigation/NavigationJS/Navigation';
 // import ProfilePhoto from './components/ProfilePhoto/ProfilePhoto';
 import InputForm from './components/InputForm/InputForm';
-import FaceRecognition from './components/FaceRecognition/FaceRecognition';
+import FaceRecognitionFromURL from './components/FaceRecognition/FaceRecognitionFromURL';
 import Particles from 'react-particles-js';
 import Clarifai from 'clarifai';
 import './App.css';
@@ -136,7 +136,15 @@ class App extends Component {
 					onPhotoSelection={this.onPhotoSelection}
 					onPhotoSubmit={this.onPhotoSubmit}
 				/>
-				<FaceRecognition
+				{/* 
+					* if no input field is selected (!imgURL or imgURL === '') and actually, if they both are empty, there'd a <p/> saying, "What are you waiting for?"
+					* if (imgURL === this.state.inputField or something like this) selected input URL AND (selectedFile === null), then render URL image or "URL FaceDetection Component".
+					* if selected browse input and imgURL is empty, then render image for browsing.
+					* if both input fields are selected, then render a msg saying, "Sorry! You can select only one input at a time. Kindly browse your desired photo from your device or grab a direct link to a file on the web and give it to us."
+					* Also don't forget to fix the default state of "gender" and "age".
+				
+				*/}
+				<FaceRecognitionFromURL
 					box={this.state.demography.box}
 					imgURL={this.state.imgURL}
 					imgForUpload={this.state.imgForUpload}
