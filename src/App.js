@@ -3,6 +3,7 @@ import Navigation from './components/Navigation/NavigationJS/Navigation';
 // import ProfilePhoto from './components/ProfilePhoto/ProfilePhoto';
 import InputForm from './components/InputForm/InputForm';
 import FaceRecognitionFromURL from './components/FaceRecognition/FaceRecognitionFromURL';
+import FaceRecognitionFromBrowse from './components/FaceRecognition/FaceRecognitionFromBrowse';
 import Particles from 'react-particles-js';
 import Clarifai from 'clarifai';
 import './App.css';
@@ -39,8 +40,8 @@ class App extends Component {
 			selectedFile : null,
 			imgForUpload : null,
 			demography   : {
-				gender : 'Hello!',
-				age    : 'What are you waiting for?',
+				gender : '',
+				age    : '',
 				box    : {},
 			},
 		};
@@ -73,7 +74,7 @@ class App extends Component {
 		if (demography.gender_appearance.concepts[0].name === 'masculine') {
 			this.setState({
 				demography : {
-					gender : `Hey! Nice picture! I believe he is `,
+					gender : `Hey! Nice picture! I believe he is`,
 					age    : `${demography.age_appearance.concepts[0].name} years old.`,
 					box    : this.calculateFaceLocation(response),
 				},
@@ -137,20 +138,40 @@ class App extends Component {
 					onPhotoSubmit={this.onPhotoSubmit}
 				/>
 				{/* 
+					DONE:
 					* if no input field is selected (!imgURL or imgURL === '') and actually, if they both are empty, there'd a <p/> saying, "What are you waiting for?"
 					* if (imgURL === this.state.inputField or something like this) selected input URL AND (selectedFile === null), then render URL image or "URL FaceDetection Component".
 					* if selected browse input and imgURL is empty, then render image for browsing.
 					* if both input fields are selected, then render a msg saying, "Sorry! You can select only one input at a time. Kindly browse your desired photo from your device or grab a direct link to a file on the web and give it to us."
 					* Also don't forget to fix the default state of "gender" and "age".
-				
+					YET TO DO:
+					* Render error massages as pop up msg.
 				*/}
-				<FaceRecognitionFromURL
-					box={this.state.demography.box}
-					imgURL={this.state.imgURL}
-					imgForUpload={this.state.imgForUpload}
-					demoGen={this.state.demography.gender}
-					demoAge={this.state.demography.age}
-				/>
+				{
+					!this.state.imgURL && !this.state.imgForUpload ? <p className='f3'>
+						Hello! What are you waiting for?
+					</p> :
+					this.state.imgURL === this.state.inputField && !this.state.imgForUpload ? <FaceRecognitionFromURL
+						box={this.state.demography.box}
+						imgURL={this.state.imgURL}
+						demoGen={this.state.demography.gender}
+						demoAge={this.state.demography.age}
+					/> :
+					!this.state.imgURL &&
+					this.state.imgForUpload === this.state.selectedFile ? <FaceRecognitionFromBrowse
+						box={this.state.demography.box}
+						imgForUpload={this.state.imgForUpload}
+						demoGen={this.state.demography.gender}
+						demoAge={this.state.demography.age}
+					/> :
+					this.state.imgURL === this.state.inputField &&
+					this.state.imgForUpload ===
+						this.state
+							.selectedFile ? <p className='f3 pt4 ma4 lh-copy'>
+						{`Oops! I believe you've tried to detect in both ways at a time. I'm afraid you can select only one input at the same time. Kindly browse your desired photo from your device or grab a direct link to a file on the web and give it to us. We're always ready to detect it for you!`}
+					</p> :
+					<p>{'Error occurred!'}</p>
+				}
 			</div>
 		);
 	}
