@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Navigation from './components/Navigation/NavigationJS/Navigation';
-// import ProfilePhoto from './components/ProfilePhoto/ProfilePhoto';
 import InputForm from './components/InputForm/InputForm';
 import FaceRecognitionFromURL from './components/FaceRecognition/FaceRecognitionFromURL';
 import FaceRecognitionFromBrowse from './components/FaceRecognition/FaceRecognitionFromBrowse';
