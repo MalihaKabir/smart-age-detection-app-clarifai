@@ -139,10 +139,9 @@ class App extends Component {
 				{/* 
 					DONE:
 					* if no input field is selected (!imgURL or imgURL === '') and actually, if they both are empty, there'd a <p/> saying, "What are you waiting for?"
-					* if (imgURL === this.state.inputField or something like this) selected input URL AND (selectedFile === null), then render URL image or "URL FaceDetection Component".
+					* if (imgURL === this.state.inputField) input URL is selected AND (selectedFile === null), then render URL image or "URL FaceDetection Component".
 					* if selected browse input and imgURL is empty, then render image for browsing.
 					* if both input fields are selected, then render a msg saying, "Sorry! You can select only one input at a time. Kindly browse your desired photo from your device or grab a direct link to a file on the web and give it to us."
-					* Also don't forget to fix the default state of "gender" and "age".
 					YET TO DO:
 					* Render error massages as pop up msg.
 				*/}
@@ -163,9 +162,7 @@ class App extends Component {
 						demoAge={this.state.demography.age}
 					/> :
 					this.state.imgURL && this.state.imgForUpload ? <p className='f3 pt4 ma4 lh-copy'>
-						{`Oops! ${(
-							<br />
-						)} I believe you've tried to detect in both ways at a time. I'm afraid you can select only one input at the same time. Kindly browse your desired photo from your device or grab a direct link to a file on the web and give it to us. We're always ready to detect it for you!`}
+						{`Oops! I believe you've tried to detect in both ways at a time. I'm afraid you can select only one input at the same time. Kindly browse your desired photo from your device or grab a direct link to a file on the web and give it to us. We're always ready to detect it for you!`}
 					</p> :
 					<p>{'Error occurred!'}</p>}
 			</div>
