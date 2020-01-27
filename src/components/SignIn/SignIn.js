@@ -30,7 +30,7 @@ const SignIn = ({ onRouteChange }) => {
 							/>
 						</div>
 					</fieldset>
-					<div className=''>
+					<div>
 						<input
 							className='b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f5 dib'
 							type='submit'

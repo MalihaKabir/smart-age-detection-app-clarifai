@@ -33,24 +33,29 @@ const particlesOption = {
 	},
 };
 
+const initialState = {
+	inputField   : '',
+	imgURL       : '',
+	selectedFile : null,
+	imgForUpload : null,
+	demography   : {
+		gender : '',
+		age    : '',
+		box    : {},
+	},
+	route        : 'signin',
+};
+
 class App extends Component {
 	constructor () {
 		super();
-		this.state = {
-			inputField   : '',
-			imgURL       : '',
-			selectedFile : null,
-			imgForUpload : null,
-			demography   : {
-				gender : '',
-				age    : '',
-				box    : {},
-			},
-			route        : 'signin',
-		};
+		this.state = initialState;
 	}
 
 	onRouteChange = (route) => {
+		if (route === 'signout') {
+			this.setState(initialState);
+		}
 		this.setState({ route: route });
 	};
 
@@ -72,7 +77,7 @@ class App extends Component {
 		if (demography.gender_appearance.concepts[0].name === 'feminine') {
 			this.setState({
 				demography : {
-					gender : `Hey! Nice picture! I believe she is `,
+					gender : `Hey! Nice picture! It seems like she is `,
 					age    : `${demography.age_appearance.concepts[0].name} years old.`,
 					box    : this.calculateFaceLocation(response),
 				},
@@ -81,7 +86,7 @@ class App extends Component {
 		if (demography.gender_appearance.concepts[0].name === 'masculine') {
 			this.setState({
 				demography : {
-					gender : `Hey! Nice picture! I believe he is`,
+					gender : `Hey! Nice picture! It seems like he is`,
 					age    : `${demography.age_appearance.concepts[0].name} years old.`,
 					box    : this.calculateFaceLocation(response),
 				},
@@ -141,7 +146,7 @@ class App extends Component {
 				{
 					route === 'signin' ? <SignIn onRouteChange={this.onRouteChange} /> :
 					route === 'signup' ? <SignUp onRouteChange={this.onRouteChange} /> :
-					<div>
+					route === 'home' ? <div>
 						<Navigation onRouteChange={this.onRouteChange} />
 						{/* <ProfilePhoto onProPicChange={this.proPicSelectedHandler} /> */}
 						<InputForm
@@ -179,7 +184,8 @@ class App extends Component {
 								{`Oops! I believe you've tried to detect in both ways at a time. I'm afraid you can select only one input at the same time. Kindly browse your desired photo from your device or grab a direct link to a file on the web and give it to us. We're always ready to detect it for you!`}
 							</p> :
 							<p>{'Error occurred!'}</p>}
-					</div>}
+					</div> :
+					<p>Something went wrong.</p>}
 			</div>
 		);
 	}
