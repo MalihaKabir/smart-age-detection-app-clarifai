@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Navigation from './components/Navigation/NavigationJS/Navigation';
+import SignIn from './components/SignIn/SignIn';
+import SignUp from './components/SignUp/SignUp';
 // import ProfilePhoto from './components/ProfilePhoto/ProfilePhoto';
 import InputForm from './components/InputForm/InputForm';
 import FaceRecognitionFromURL from './components/FaceRecognition/FaceRecognitionFromURL';
@@ -9,7 +11,7 @@ import Clarifai from 'clarifai';
 import './App.css';
 
 const app = new Clarifai.App({
-	apiKey : '1c5ec0d650d14019aa1608dce5d0ea3a',
+	apiKey : 'YOUR API KEY',
 });
 
 const particlesOption = {
@@ -44,8 +46,13 @@ class App extends Component {
 				age    : '',
 				box    : {},
 			},
+			route        : 'signin',
 		};
 	}
+
+	onRouteChange = (route) => {
+		this.setState({ route: route });
+	};
 
 	calculateFaceLocation = (data) => {
 		const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
@@ -112,7 +119,8 @@ class App extends Component {
 
 	onPhotoSubmit = () => {
 		this.setState({ imgForUpload: this.state.selectedFile });
-		console.log(JSON.stringify(this.state.selectedFile), 'onPhotoSubmit');
+		console.log(atob(btoa(this.state.selectedFile)), 'onPhotoSubmit');
+		// console.log(JSON.stringify(this.state.selectedFile), 'onPhotoSubmit');
 		// app.models.predict(Clarifai.DEMOGRAPHICS_MODEL, JSON.parse(this.state.selectedFile)).then(
 		// 	function (response) {
 		// 		// do something with response
@@ -126,49 +134,52 @@ class App extends Component {
 	};
 
 	render () {
+		const { route, imgURL, imgForUpload, demography } = this.state;
 		return (
 			<div className='App'>
 				<Particles params={particlesOption} className='particles' />
-				<Navigation />
-				{/* <ProfilePhoto onProPicChange={this.proPicSelectedHandler} /> */}
-				<InputForm
-					onInputChange={this.onInputChange}
-					onInputSubmit={this.onInputSubmit}
-					onPhotoSelection={this.onPhotoSelection}
-					onPhotoSubmit={this.onPhotoSubmit}
-				/>
-				{/* 
-					DONE:
-					* if no input field is selected (!imgURL or imgURL === '') and actually, if they both are empty, there'd a <p/> saying, "What are you waiting for?"
-					* if (imgURL === this.state.inputField or something like this) selected input URL AND (selectedFile === null), then render URL image or "URL FaceDetection Component".
-					* if selected browse input and imgURL is empty, then render image for browsing.
-					* if both input fields are selected, then render a msg saying, "Sorry! You can select only one input at a time. Kindly browse your desired photo from your device or grab a direct link to a file on the web and give it to us."
-					* Also don't forget to fix the default state of "gender" and "age".
-					YET TO DO:
-					* Render error massages as pop up msg.
-				*/}
 				{
-					!this.state.imgURL && !this.state.imgForUpload ? <p className='f3'>
-						Hello! What are you waiting for?
-					</p> :
-					this.state.imgURL && !this.state.imgForUpload ? <FaceRecognitionFromURL
-						box={this.state.demography.box}
-						imgURL={this.state.imgURL}
-						demoGen={this.state.demography.gender}
-						demoAge={this.state.demography.age}
-					/> :
-					!this.state.imgURL && this.state.imgForUpload ? <FaceRecognitionFromBrowse
-						box={this.state.demography.box}
-						imgForUpload={this.state.imgForUpload}
-						demoGen={this.state.demography.gender}
-						demoAge={this.state.demography.age}
-					/> :
-					this.state.imgURL && this.state.imgForUpload ? <p className='f3 pt4 ma4 lh-copy'>
-						{`Oops! ${(
-							<br />
-						)} I believe you've tried to detect in both ways at a time. I'm afraid you can select only one input at the same time. Kindly browse your desired photo from your device or grab a direct link to a file on the web and give it to us. We're always ready to detect it for you!`}
-					</p> :
-					<p>{'Error occurred!'}</p>}
+					route === 'signin' ? <SignIn onRouteChange={this.onRouteChange} /> :
+					route === 'signup' ? <SignUp onRouteChange={this.onRouteChange} /> :
+					<div>
+						<Navigation onRouteChange={this.onRouteChange} />
+						{/* <ProfilePhoto onProPicChange={this.proPicSelectedHandler} /> */}
+						<InputForm
+							onInputChange={this.onInputChange}
+							onInputSubmit={this.onInputSubmit}
+							onPhotoSelection={this.onPhotoSelection}
+							onPhotoSubmit={this.onPhotoSubmit}
+						/>
+						{/* 
+							DONE:
+							* if no input field is selected (!imgURL or imgURL === '') and actually, if they both are empty, there'd a <p/> saying, "What are you waiting for?"
+							* if (imgURL === this.state.inputField or something like this) selected input URL AND (selectedFile === null), then render URL image or "URL FaceDetection Component".
+							* if selected browse input and imgURL is empty, then render image for browsing.
+							* if both input fields are selected, then render a msg saying, "Sorry! You can select only one input at a time. Kindly browse your desired photo from your device or grab a direct link to a file on the web and give it to us."
+							* Also don't forget to fix the default state of "gender" and "age".
+							YET TO DO:
+							* Render error massages as pop up msg.
+						*/}
+						{
+							!imgURL && !imgForUpload ? <p className='f3'>Hello! What are you waiting for?</p> :
+							imgURL && !imgForUpload ? <FaceRecognitionFromURL
+								box={demography.box}
+								imgURL={imgURL}
+								demoGen={demography.gender}
+								demoAge={demography.age}
+							/> :
+							!imgURL && imgForUpload ? <FaceRecognitionFromBrowse
+								box={demography.box}
+								imgForUpload={imgForUpload}
+								demoGen={demography.gender}
+								demoAge={demography.age}
+							/> :
+							imgURL &&
+							imgForUpload ? <p className='f3 pt4 ma4 lh-copy'>
+								{`Oops! I believe you've tried to detect in both ways at a time. I'm afraid you can select only one input at the same time. Kindly browse your desired photo from your device or grab a direct link to a file on the web and give it to us. We're always ready to detect it for you!`}
+							</p> :
+							<p>{'Error occurred!'}</p>}
+					</div>}
 			</div>
 		);
 	}
