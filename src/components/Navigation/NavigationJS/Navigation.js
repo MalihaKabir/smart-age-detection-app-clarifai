@@ -9,7 +9,7 @@ const Navigation = ({ onRouteChange }) => {
 			<p
 				className='fl w-40 pa3 pr4 f4 link dim black pointer pt2 pr3'
 				style={{ display: 'flex', justifyContent: 'flex-end' }}
-				onClick={() => onRouteChange('signin')}
+				onClick={() => onRouteChange('signout')}
 			>
 				Sign Out
 			</p>

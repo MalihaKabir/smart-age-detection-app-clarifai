@@ -126,7 +126,7 @@ class App extends Component {
 		this.setState({ imgForUpload: this.state.selectedFile });
 		console.log(atob(btoa(this.state.selectedFile)), 'onPhotoSubmit');
 		// console.log(JSON.stringify(this.state.selectedFile), 'onPhotoSubmit');
-		// app.models.predict(Clarifai.DEMOGRAPHICS_MODEL, JSON.parse(this.state.selectedFile)).then(
+		// app.models.predict(Clarifai.DEMOGRAPHICS_MODEL, (this.state.selectedFile)).then(
 		// 	function (response) {
 		// 		// do something with response
 		// 		console.log(response);
@@ -146,6 +146,7 @@ class App extends Component {
 				{
 					route === 'signin' ? <SignIn onRouteChange={this.onRouteChange} /> :
 					route === 'signup' ? <SignUp onRouteChange={this.onRouteChange} /> :
+					route === 'signout' ? <SignIn onRouteChange={this.onRouteChange} /> :
 					route === 'home' ? <div>
 						<Navigation onRouteChange={this.onRouteChange} />
 						{/* <ProfilePhoto onProPicChange={this.proPicSelectedHandler} /> */}
@@ -185,7 +186,7 @@ class App extends Component {
 							</p> :
 							<p>{'Error occurred!'}</p>}
 					</div> :
-					<p>Something went wrong.</p>}
+					<p>{`Something went wrong.`}</p>}
 			</div>
 		);
 	}
