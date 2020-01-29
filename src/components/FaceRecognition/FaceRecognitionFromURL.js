@@ -3,9 +3,9 @@ import './FaceRecognition.css';
 
 const FaceRecognitionFromURL = ({ imgURL, box, demoGen, demoAge }) => {
 	return (
-		<div className='fl w-100 tc'>
+		<div className='fl w-100 tc mt2'>
 			<div>
-				<div className='center'>
+				<div className='center pa2 mb2'>
 					<p className='ml2 mr2 f3'>{`${demoGen} ${demoAge}`}</p>
 				</div>
 				<div className='center'>

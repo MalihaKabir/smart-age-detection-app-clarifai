@@ -6,12 +6,13 @@ import SignUp from './components/SignUp/SignUp';
 import InputForm from './components/InputForm/InputForm';
 import FaceRecognitionFromURL from './components/FaceRecognition/FaceRecognitionFromURL';
 import FaceRecognitionFromBrowse from './components/FaceRecognition/FaceRecognitionFromBrowse';
+import InputConflictWarning from './components/WarningMassages/InputConflictWarning';
 import Particles from 'react-particles-js';
 import Clarifai from 'clarifai';
 import './App.css';
 
 const app = new Clarifai.App({
-	apiKey : 'YOUR OWN API KEY',
+	apiKey : '1c5ec0d650d14019aa1608dce5d0ea3a',
 });
 
 const particlesOption = {
@@ -147,7 +148,8 @@ class App extends Component {
 					route === 'signup' ? <SignUp onRouteChange={this.onRouteChange} /> :
 					route === 'signin' ? <SignIn onRouteChange={this.onRouteChange} /> :
 					route === 'signout' ? <SignIn onRouteChange={this.onRouteChange} /> :
-					route === 'home' ? <div>
+					route === 'home' ? 
+					<div>
 						<Navigation onRouteChange={this.onRouteChange} />
 						{/* <ProfilePhoto onProPicChange={this.proPicSelectedHandler} /> */}
 						<InputForm
@@ -170,10 +172,8 @@ class App extends Component {
 								demoGen={demography.gender}
 								demoAge={demography.age}
 							/> :
-							imgURL &&
-							imgForUpload ? <p className='f3 pt4 ma4 lh-copy'>
-								{`Oops! I believe you've tried to detect in both ways at a time. I'm afraid you can select only one input at the same time. Kindly browse your desired photo from your device or grab a direct link to a file on the web and give it to us. We're always ready to detect it for you!`}
-							</p> :
+							imgURL && imgForUpload ? 
+							<InputConflictWarning /> :
 							<p>{'Error occurred!'}</p>}
 					</div> :
 					<p className='f4 ma4'>{`Something went wrong.`}</p>}

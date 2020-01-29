@@ -1,10 +1,9 @@
-/* @import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap'); */
 @import url('https://fonts.googleapis.com/css?family=Kalam&display=swap');
-body {
+* {
 	margin: 0;
-	/* font-family: 'Exo 2', sans-serif; */
+}
+body {
 	font-family: 'Kalam', cursive;
-	/* background: linear-gradient(to right, #4ca1af, #c4e0e5); */
 	background: linear-gradient(to right, #eecda3, #ef629f);
 }
 

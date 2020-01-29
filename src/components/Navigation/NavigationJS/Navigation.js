@@ -2,7 +2,7 @@ import React from 'react';
 
 const Navigation = ({ onRouteChange }) => {
 	return (
-		<nav>
+		<nav className='mt3'>
 			<h2 className='fl w-60 pa3 pl4 f3 pt2' style={{ display: 'flex', justifyContent: 'flex-start' }}>
 				Maliha
 			</h2>
