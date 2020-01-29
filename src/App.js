@@ -11,7 +11,7 @@ import Clarifai from 'clarifai';
 import './App.css';
 
 const app = new Clarifai.App({
-	apiKey : 'YOUR OWN API KEY',
+	apiKey : '1c5ec0d650d14019aa1608dce5d0ea3a',
 });
 
 const particlesOption = {
@@ -43,7 +43,7 @@ const initialState = {
 		age    : '',
 		box    : {},
 	},
-	route        : 'signin',
+	route        : 'signup',
 };
 
 class App extends Component {
@@ -144,8 +144,8 @@ class App extends Component {
 			<div className='App'>
 				<Particles params={particlesOption} className='particles' />
 				{
-					route === 'signin' ? <SignIn onRouteChange={this.onRouteChange} /> :
 					route === 'signup' ? <SignUp onRouteChange={this.onRouteChange} /> :
+					route === 'signin' ? <SignIn onRouteChange={this.onRouteChange} /> :
 					route === 'signout' ? <SignIn onRouteChange={this.onRouteChange} /> :
 					route === 'home' ? <div>
 						<Navigation onRouteChange={this.onRouteChange} />
@@ -156,16 +156,6 @@ class App extends Component {
 							onPhotoSelection={this.onPhotoSelection}
 							onPhotoSubmit={this.onPhotoSubmit}
 						/>
-						{/* 
-							DONE:
-							* if no input field is selected (!imgURL or imgURL === '') and actually, if they both are empty, there'd a <p/> saying, "What are you waiting for?"
-							* if (imgURL === this.state.inputField or something like this) selected input URL AND (selectedFile === null), then render URL image or "URL FaceDetection Component".
-							* if selected browse input and imgURL is empty, then render image for browsing.
-							* if both input fields are selected, then render a msg saying, "Sorry! You can select only one input at a time. Kindly browse your desired photo from your device or grab a direct link to a file on the web and give it to us."
-							* Also don't forget to fix the default state of "gender" and "age".
-							YET TO DO:
-							* Render error massages as pop up msg.
-						*/}
 						{
 							!imgURL && !imgForUpload ? <p className='f3'>Hello! What are you waiting for?</p> :
 							imgURL && !imgForUpload ? <FaceRecognitionFromURL
@@ -186,7 +176,7 @@ class App extends Component {
 							</p> :
 							<p>{'Error occurred!'}</p>}
 					</div> :
-					<p>{`Something went wrong.`}</p>}
+					<p className='f4 ma4'>{`Something went wrong.`}</p>}
 			</div>
 		);
 	}

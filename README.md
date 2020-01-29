@@ -11,8 +11,17 @@
 
 **after age detection:**
 
-![screencapture-localhost-3000-2020-01-23-16_43_03](https://user-images.githubusercontent.com/43598622/73117480-89435600-3f70-11ea-951f-80b99adc2e76.jpg)
+![screencapture-localhost-3000-2020-01-28-02_30_59](https://user-images.githubusercontent.com/43598622/73362456-166c0f00-42d1-11ea-970d-f7c6fb79510d.jpg)
 
 **before age detection:**
 
 ![screencapture-localhost-3000-2020-01-23-16_44_49](https://user-images.githubusercontent.com/43598622/73117476-66b13d00-3f70-11ea-861e-d802a83e51e7.jpg)
+
+**sign up form:**
+
+![screencapture-localhost-3000-2020-01-27-23_36_42](https://user-images.githubusercontent.com/43598622/73362788-af9b2580-42d1-11ea-8a02-7ab5be298479.jpg)
+
+**sign in form:**
+
+![screencapture-localhost-3000-2020-01-27-23_35_47](https://user-images.githubusercontent.com/43598622/73362701-811d4a80-42d1-11ea-8e89-06e18ba9b9e3.jpg)
+
