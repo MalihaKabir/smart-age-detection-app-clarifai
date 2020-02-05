@@ -11,10 +11,12 @@ import Particles from 'react-particles-js';
 import Clarifai from 'clarifai';
 import './App.css';
 
+// declaring clarifai API key
 const app = new Clarifai.App({
-	apiKey : 'YOUR OWN API KEY',
+	apiKey : 'YOUR OWN API',
 });
 
+// for particle effect, declaring the options of particles that you wanna use
 const particlesOption = {
 	particles : {
 		number      : {
@@ -34,6 +36,7 @@ const particlesOption = {
 	},
 };
 
+// Initiating all the states for house keeping
 const initialState = {
 	inputField   : '',
 	imgURL       : '',
@@ -78,7 +81,7 @@ class App extends Component {
 		if (demography.gender_appearance.concepts[0].name === 'feminine') {
 			this.setState({
 				demography : {
-					gender : `Hey! Nice picture! It seems like she is `,
+					gender : `Hey! Nice picture! I believe she is `,
 					age    : `${demography.age_appearance.concepts[0].name} years old.`,
 					box    : this.calculateFaceLocation(response),
 				},
@@ -87,7 +90,7 @@ class App extends Component {
 		if (demography.gender_appearance.concepts[0].name === 'masculine') {
 			this.setState({
 				demography : {
-					gender : `Hey! Nice picture! It seems like he is`,
+					gender : `Hey! Nice picture! I believe he is`,
 					age    : `${demography.age_appearance.concepts[0].name} years old.`,
 					box    : this.calculateFaceLocation(response),
 				},
@@ -110,13 +113,14 @@ class App extends Component {
 
 	onPhotoSelection = (event) => {
 		// this.setState({ selectedFile: event.target.files[0].name });
-		// console.log(event.target.files[0].name, 'onPhotoSelection');
+		// console.log(event.target.files[0].name , 'onPhotoSelection');
 		const currentFile = event.target.files[0];
 		const reader = new FileReader();
 		reader.addEventListener(
 			'load',
 			() => {
-				this.setState({ selectedFile: reader.result });
+				this.setState({ selectedFile: reader.result.replace(/^data:image\/(.*);base64,/, '') });
+				console.log('selectedFile', this.state.selectedFile);
 			},
 			false,
 		);
@@ -125,18 +129,17 @@ class App extends Component {
 
 	onPhotoSubmit = () => {
 		this.setState({ imgForUpload: this.state.selectedFile });
-		console.log(atob(btoa(this.state.selectedFile)), 'onPhotoSubmit');
-		// console.log(JSON.stringify(this.state.selectedFile), 'onPhotoSubmit');
-		// app.models.predict(Clarifai.DEMOGRAPHICS_MODEL, (this.state.selectedFile)).then(
-		// 	function (response) {
-		// 		// do something with response
-		// 		console.log(response);
-		// 	},
-		// 	function (err) {
-		// 		// there was an error
-		// 		console.log(err, 'Photo Submit Error');
-		// 	},
-		// );
+		console.log(this.state.selectedFile, 'onPhotoSubmit');
+		// console.log(atob(btoa(this.state.selectedFile)), 'onPhotoSubmit');
+		app.models
+			.predict(Clarifai.DEMOGRAPHICS_MODEL, {
+				base64 : this.state.selectedFile,
+			})
+			.then((response) => {
+				// console.log(this.grabAge(response));
+				console.log(response);
+			})
+			.catch((err) => console.log(err, 'Photo Submit Error'));
 	};
 
 	render () {
@@ -148,8 +151,7 @@ class App extends Component {
 					route === 'signup' ? <SignUp onRouteChange={this.onRouteChange} /> :
 					route === 'signin' ? <SignIn onRouteChange={this.onRouteChange} /> :
 					route === 'signout' ? <SignIn onRouteChange={this.onRouteChange} /> :
-					route === 'home' ? 
-					<div>
+					route === 'home' ? <div>
 						<Navigation onRouteChange={this.onRouteChange} />
 						{/* <ProfilePhoto onProPicChange={this.proPicSelectedHandler} /> */}
 						<InputForm
@@ -168,13 +170,12 @@ class App extends Component {
 							/> :
 							!imgURL && imgForUpload ? <FaceRecognitionFromBrowse
 								box={demography.box}
-								imgForUpload={imgForUpload}
+								imgSrc={imgForUpload}
 								demoGen={demography.gender}
 								demoAge={demography.age}
 							/> :
-							imgURL && imgForUpload ? 
-							<InputConflictWarning /> :
-							<p>{'Error occurred!'}</p>}
+							imgURL && imgForUpload ? <InputConflictWarning /> :
+							<p>{'Something went wrong'}</p>}
 					</div> :
 					<p className='f4 ma4'>{`Something went wrong.`}</p>}
 			</div>

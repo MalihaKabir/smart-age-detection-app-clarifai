@@ -10,7 +10,6 @@ const InputForm = ({ onInputChange, onInputSubmit, onPhotoSelection, onPhotoSubm
 			<TitleOfInputField />
 			<div className='form pa2 br3 shadow-5 mr4 ml4'>
 				<InputFormURL onInputURLChange={onInputChange} onInputURLSubmit={onInputSubmit} />
-				{/* <br /> */}
 				<InputFormBrowse onBrowsePhotoSelection={onPhotoSelection} onBrowsePhotoSubmit={onPhotoSubmit} />
 			</div>
 		</div>
