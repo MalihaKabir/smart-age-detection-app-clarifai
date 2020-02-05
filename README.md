@@ -11,11 +11,15 @@
 
 **after age detection:**
 
-![screencapture-localhost-3000-2020-01-28-02_30_59](https://user-images.githubusercontent.com/43598622/73362456-166c0f00-42d1-11ea-970d-f7c6fb79510d.jpg)
+![screencapture-localhost-3001-2020-02-06-04_14_27](https://user-images.githubusercontent.com/43598622/73889033-f7edb100-4898-11ea-8a0c-0589d71bac22.jpg)
 
 **before age detection:**
 
 ![screencapture-localhost-3000-2020-01-23-16_44_49](https://user-images.githubusercontent.com/43598622/73117476-66b13d00-3f70-11ea-861e-d802a83e51e7.jpg)
+
+**rendering error message if user try to detect using both input field:**
+
+![screencapture-localhost-3001-2020-02-06-04_15_45](https://user-images.githubusercontent.com/43598622/73889082-0dfb7180-4899-11ea-8def-3a8460f98603.jpg)
 
 **sign up form:**
 
