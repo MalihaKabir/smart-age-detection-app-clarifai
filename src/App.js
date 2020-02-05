@@ -38,25 +38,28 @@ const particlesOption = {
 
 // Initiating all the states for house keeping
 const initialState = {
-	inputField   : '',
-	imgURL       : '',
-	selectedFile : null,
-	imgForUpload : null,
+	inputField   : '', // for URL input field,
+	imgURL       : '', // for btn to grab URL from input field,
+	selectedFile : null, // for input field to select img from device,
+	imgForUpload: null, // for btn to grab img to upload & detect,
+	// to detect gender, age as well as face, storing them all in a object,
 	demography   : {
 		gender : '',
 		age    : '',
 		box    : {},
 	},
-	route        : 'signup',
+	route: 'signup', // declaring initial state for routing. And here, it's the sign up page that will render first to a user.
 };
 
 class App extends Component {
 	constructor () {
 		super();
-		this.state = initialState;
+		this.state = initialState; // declaring the state
 	}
 
+	// creating method to change route
 	onRouteChange = (route) => {
+		// if user click to sign out, every state will go back to the initial state as it was
 		if (route === 'signout') {
 			this.setState(initialState);
 		}

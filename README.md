@@ -30,4 +30,4 @@
 ![screencapture-localhost-3000-2020-01-27-23_35_47](https://user-images.githubusercontent.com/43598622/73362701-811d4a80-42d1-11ea-8e89-06e18ba9b9e3.jpg)
 
 
-***You also can check out my FaceDetection app [here](https://github.com/MalihaKabir/SmartBrain-App-v5).***
+** ***You also can check out my FaceDetection app [here](https://github.com/MalihaKabir/SmartBrain-App-v5).***
